@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
     [Table("PlaylistCancion")]
     public partial class PlaylistCancion

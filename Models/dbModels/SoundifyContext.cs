@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
-    public partial class SoundifyContext : DbContext
+    public partial class SoundifyContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         public SoundifyContext()
         {
@@ -23,20 +25,13 @@ namespace ProyectoSoundify.Models.dbModels
         public virtual DbSet<Playlist> Playlists { get; set; } = null!;
         public virtual DbSet<PlaylistCancion> PlaylistCancions { get; set; } = null!;
         public virtual DbSet<Reproduccion> Reproduccions { get; set; } = null!;
-        public virtual DbSet<Rol> Rols { get; set; } = null!;
-        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Soundify;Trusted_Connection=True;");
-            }
-        }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Anuncio>(entity =>
             {
                 entity.HasOne(d => d.IdUsuarioNavigation)
@@ -64,7 +59,7 @@ namespace ProyectoSoundify.Models.dbModels
                     .WithMany(p => p.IdCancions)
                     .UsingEntity<Dictionary<string, object>>(
                         "MeGustum",
-                        l => l.HasOne<Usuario>().WithMany().HasForeignKey("IdUsuario").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Usuario"),
+                        l => l.HasOne<ApplicationUser>().WithMany().HasForeignKey("IdUsuario").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Usuario"),
                         r => r.HasOne<Cancion>().WithMany().HasForeignKey("IdCancion").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Cancion"),
                         j =>
                         {
@@ -133,16 +128,7 @@ namespace ProyectoSoundify.Models.dbModels
                     .HasConstraintName("FK_ReproduccionUsuario");
             });
 
-            modelBuilder.Entity<Rol>(entity =>
-            {
-                entity.Property(e => e.NombreRol).IsFixedLength();
-            });
-
-            modelBuilder.Entity<Usuario>(entity =>
-            {
-                entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK_User");
-            });
+           
 
             OnModelCreatingPartial(modelBuilder);
         }

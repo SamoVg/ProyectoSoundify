@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
     public partial class Descarga
     {
@@ -20,6 +20,6 @@ namespace ProyectoSoundify.Models.dbModels
         public virtual Cancion IdCancionNavigation { get; set; } = null!;
         [ForeignKey("IdUser")]
         [InverseProperty("Descargas")]
-        public virtual Usuario IdUserNavigation { get; set; } = null!;
+        public virtual ApplicationUser IdUserNavigation { get; set; } = null!;
     }
 }

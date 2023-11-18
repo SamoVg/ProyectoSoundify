@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
     [Table("Cancion")]
     public partial class Cancion
@@ -14,7 +14,7 @@ namespace ProyectoSoundify.Models.dbModels
             Descargas = new HashSet<Descarga>();
             PlaylistCancions = new HashSet<PlaylistCancion>();
             Reproduccions = new HashSet<Reproduccion>();
-            IdUsuarios = new HashSet<Usuario>();
+            IdUsuarios = new HashSet<ApplicationUser>();
         }
 
         [Key]
@@ -36,7 +36,7 @@ namespace ProyectoSoundify.Models.dbModels
         public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
         [ForeignKey("IdUsuario")]
         [InverseProperty("Cancions")]
-        public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+        public virtual ApplicationUser IdUsuarioNavigation { get; set; } = null!;
         [InverseProperty("IdCancionNavigation")]
         public virtual ICollection<Descarga> Descargas { get; set; }
         [InverseProperty("IdCancionNavigation")]
@@ -46,6 +46,6 @@ namespace ProyectoSoundify.Models.dbModels
 
         [ForeignKey("IdCancion")]
         [InverseProperty("IdCancions")]
-        public virtual ICollection<Usuario> IdUsuarios { get; set; }
+        public virtual ICollection<ApplicationUser> IdUsuarios { get; set; }
     }
 }

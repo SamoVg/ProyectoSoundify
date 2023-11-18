@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
     public partial class Anuncio
     {
@@ -18,6 +18,6 @@ namespace ProyectoSoundify.Models.dbModels
 
         [ForeignKey("IdUsuario")]
         [InverseProperty("Anuncios")]
-        public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+        public virtual ApplicationUser IdUsuarioNavigation { get; set; } = null!;
     }
 }

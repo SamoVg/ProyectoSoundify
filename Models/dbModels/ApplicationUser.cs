@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-namespace ProyectoSoundify.Models.dbModels
+namespace Soundify.Models.dbModels
 {
-    [Table("Usuario")]
-    public partial class Usuario
+    [Table("AspNetUsers")]
+    public class ApplicationUser : IdentityUser<int>
     {
-        public Usuario()
+        public ApplicationUser()
         {
             Anuncios = new HashSet<Anuncio>();
             Cancions = new HashSet<Cancion>();
@@ -19,14 +17,7 @@ namespace ProyectoSoundify.Models.dbModels
             IdCancions = new HashSet<Cancion>();
         }
 
-        [Key]
-        public int IdUsuario { get; set; }
-        [StringLength(50)]
-        public string Nombre { get; set; } = null!;
-        [StringLength(256)]
-        public string Correo { get; set; } = null!;
-        [StringLength(50)]
-        public string Contrasenia { get; set; } = null!;
+       
         [StringLength(256)]
         public string? RutaImg { get; set; }
         [Column(TypeName = "datetime")]
