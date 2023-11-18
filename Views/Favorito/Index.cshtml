@@ -1,0 +1,46 @@
+﻿@model FavoritoViewModel
+@{
+}
+
+
+<h1>Soy favoritos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre Cancion
+            </th>
+            <th>
+                Duracion
+            </th>
+            <th>
+                Imagen
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.User.IdCancions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duracion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RutaImg)
+                </td>
+                <td>
+                    <form asp-controller="Favorito" asp-action="Delete" asp-route-returnUrl="@Model.ReturnUrl">
+                        <input type="hidden" name="IdCancion" value="@Html.DisplayFor(modelItem => item.IdCancion)">
+                        <button type="submit">Quitar like</button>
+                    </form>
+                    <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

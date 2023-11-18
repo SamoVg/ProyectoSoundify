@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Soundify.Models.dbModels;
+using ProyectoSoundify.Models.dbModels;
 
 #nullable disable
 
-namespace Soundify.Migrations
+namespace ProyectoSoundify.Migrations
 {
     [DbContext(typeof(SoundifyContext))]
     [Migration("20231115233527_init")]

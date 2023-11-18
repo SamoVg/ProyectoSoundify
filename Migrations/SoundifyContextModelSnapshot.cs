@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Soundify.Models.dbModels;
+using ProyectoSoundify.Models.dbModels;
 
 #nullable disable
 
-namespace Soundify.Migrations
+namespace ProyectoSoundify.Migrations
 {
     [DbContext(typeof(SoundifyContext))]
     partial class SoundifyContextModelSnapshot : ModelSnapshot

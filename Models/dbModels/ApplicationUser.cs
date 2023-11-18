@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Soundify.Models.dbModels
+namespace ProyectoSoundify.Models.dbModels
 {
     [Table("AspNetUsers")]
     public class ApplicationUser : IdentityUser<int>

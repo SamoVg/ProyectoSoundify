@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Soundify.Models.dbModels
+namespace ProyectoSoundify.Models.dbModels
 {
     public partial class SoundifyContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {

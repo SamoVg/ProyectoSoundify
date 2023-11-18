@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Soundify.Migrations
+namespace ProyectoSoundify.Migrations
 {
     public partial class init : Migration
     {
