@@ -11,7 +11,7 @@ using ProyectoSoundify.Models.dbModels;
 
 namespace ProyectoSoundify.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="2")]
     public class AnunciosController : Controller
     {
         private readonly SoundifyContext _context;

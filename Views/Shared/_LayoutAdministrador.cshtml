@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Soundify</title>
+    <link rel="stylesheet" href="~/css/global.css"/>
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+    @await RenderSectionAsync("Css", required: false)
+</head>
+<body>
+   
+    <nav>
+        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Anuncios</a>
+        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Categorias</a>
+        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Usuarios</a>
+        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Audios</a>
+        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Salir</a>
+
+
+    </nav>
+        <main role="main">
+            @RenderBody()
+        </main>
+        
+  
+    
+
+    <script src="http://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

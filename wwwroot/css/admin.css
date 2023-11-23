@@ -1,0 +1,13 @@
+﻿nav {
+    display: flex;
+    width: 100dvw; 
+    align-items: center;
+    margin: 0px 20px;
+    position: fixed;
+    top:0;
+}
+
+.link_item {
+    padding: 50px;
+    background-color: var(--color_principal);
+}

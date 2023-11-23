@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ProyectoSoundify.Models.dbModels;
 
 
@@ -15,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<SoundifyContext>()
     .AddDefaultTokenProviders();
+//Añade un usuario default
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -50,5 +54,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+
 
 app.Run();
