@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ProyectoSoundify.Models.dbModels
@@ -47,5 +48,8 @@ namespace ProyectoSoundify.Models.dbModels
         [ForeignKey("IdCancion")]
         [InverseProperty("IdCancions")]
         public virtual ICollection<ApplicationUser> IdUsuarios { get; set; }
+
+        
     }
+
 }

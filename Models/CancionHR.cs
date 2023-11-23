@@ -1,6 +1,10 @@
 ﻿using ProyectoSoundify.Models.dbModels;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json.Serialization;
+using MessagePack;
+using System.Runtime.Serialization;
 
 namespace ProyectoSoundify.Models
 {
@@ -19,6 +23,12 @@ namespace ProyectoSoundify.Models
         public DateTime FechaSubida { get; set; }
         public int IdUsuario { get; set; }
 
-       
+
+        [JsonIgnore]
+        [IgnoreMember]
+        [IgnoreDataMember]
+
+        public SelectList? Categoria { get; set; }
+
     }
 }

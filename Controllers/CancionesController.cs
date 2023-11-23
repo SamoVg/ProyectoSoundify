@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,8 +24,9 @@ namespace ProyectoSoundify.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+        
         // GET: Canciones
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation);
@@ -89,7 +91,8 @@ namespace ProyectoSoundify.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "IdCategoria", cancion.IdCategoria);
+            cancion.Categoria = new SelectList(_context.Categoria, "IdCategoria", "NombreCategoria", cancion.IdCategoria);
+
             return View(cancion);
         }
 
