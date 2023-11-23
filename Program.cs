@@ -16,9 +16,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<SoundifyContext>()
     .AddDefaultTokenProviders();
-//Añade un usuario default
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddRoles<IdentityRole>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
