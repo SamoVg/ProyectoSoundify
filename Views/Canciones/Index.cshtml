@@ -13,25 +13,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+               Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
+                Descripcion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Duracion)
+                Duracion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RutaImg)
+                Ruta imagen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaSubida)
+                Subido el
             </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.IdCategoriaNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+                Subido por:
             </th>
             <th></th>
         </tr>
@@ -49,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Duracion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RutaImg)
+               <img src="@Html.DisplayNameFor(model => model.RutaImg)" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaSubida)
@@ -58,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.IdCategoria)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)
+                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
