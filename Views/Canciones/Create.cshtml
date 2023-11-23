@@ -22,11 +22,13 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
+            <!--Aqui hay que obtener la duracion dependiendo del archivo-->
             <div class="form-group">
                 <label asp-for="Duracion" class="control-label"></label>
                 <input asp-for="Duracion" class="form-control" />
                 <span asp-validation-for="Duracion" class="text-danger"></span>
             </div>
+            <!--Aqui hay que cambiarlo por el nombre de la categoria en vez del id-->
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
                 <select asp-for="IdCategoria" class ="form-control" asp-items="ViewBag.IdCategoria"></select>
@@ -36,15 +38,8 @@
                 <input asp-for="RutaImg" class="form-control" />
                 <span asp-validation-for="RutaImg" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="FechaSubida" class="control-label"></label>
-                <input asp-for="FechaSubida" class="form-control" />
-                <span asp-validation-for="FechaSubida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class ="form-control" asp-items="ViewBag.IdUsuario"></select>
-            </div>
+            
+        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

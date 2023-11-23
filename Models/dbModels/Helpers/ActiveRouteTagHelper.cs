@@ -40,7 +40,7 @@ namespace ProyectoSoundify.Models.Helpers
         /// </summary>
         [HtmlAttributeNotBound]
         [ViewContext]
-        public ViewContext ViewContext { get; set; }
+        public ViewContext ViewContext { get; set; } = null!;
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -56,15 +56,15 @@ namespace ProyectoSoundify.Models.Helpers
 
         private bool ShouldBeActive()
         {
-            string currentController = ViewContext.RouteData.Values["Controller"].ToString();
-            string currentAction = ViewContext.RouteData.Values["Action"].ToString();
-
-            if (!string.IsNullOrWhiteSpace(Controller) && Controller.ToLower() != currentController.ToLower())
+            string? currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+            string? currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+            
+            if (!string.IsNullOrWhiteSpace(Controller) && Controller.ToLower() != currentController?.ToLower())
             {
                 return false;
             }
 
-            if (!string.IsNullOrWhiteSpace(Action) && Action.ToLower() != currentAction.ToLower())
+            if (!string.IsNullOrWhiteSpace(Action) && Action.ToLower() != currentAction?.ToLower())
             {
                 return false;
             }
@@ -72,7 +72,7 @@ namespace ProyectoSoundify.Models.Helpers
             foreach (KeyValuePair<string, string> routeValue in RouteValues)
             {
                 if (!ViewContext.RouteData.Values.ContainsKey(routeValue.Key) ||
-                    ViewContext.RouteData.Values[routeValue.Key].ToString() != routeValue.Value)
+                    ViewContext.RouteData.Values[routeValue.Key]?.ToString() != routeValue.Value)
                 {
                     return false;
                 }
@@ -89,7 +89,7 @@ namespace ProyectoSoundify.Models.Helpers
                 classAttr = new TagHelperAttribute("class", "active");
                 output.Attributes.Add(classAttr);
             }
-            else if (classAttr.Value == null || classAttr.Value.ToString().IndexOf("active") < 0)
+            else if (classAttr.Value == null || classAttr.Value.ToString()?.IndexOf("active") < 0)
             {
                 output.Attributes.SetAttribute("class", classAttr.Value == null
                     ? "active"
