@@ -1,6 +1,6 @@
 ﻿@page
 @using ProyectoSoundify.ViewModels;
-@model LoginViewModelcs
+@model IndexModel;
 
 @{
     ViewData["Title"] = "Perfil";
@@ -8,7 +8,6 @@
 }
 
 <h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
@@ -25,7 +24,18 @@
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
 
-        <partial name="_Logout" />
+        @{
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <form class="form-inline" asp-page-handler="Logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                </form>
+            }
+            else
+            {
+                <p>You have successfully logged out of the application.</p>
+            }
+        }
     </div>
 </div>
 

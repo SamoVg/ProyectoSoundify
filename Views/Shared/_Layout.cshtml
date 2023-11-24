@@ -9,27 +9,30 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <div class="menu">></div>
-        <nav id="nav">
+    
+        <header>
+            <div class="menu">></div>
+            <nav id="nav">
 
-            <a class="link_container" is-active-route asp-controller="Canciones" asp-action="Index">Inicio</a>
+                <a class="link_container" is-active-route asp-controller="Canciones" asp-action="Index">Inicio</a>
 
-            <a class="link_container" is-active-route asp-controller="Favorito" asp-action="Index">Favoritos</a>
+                <a class="link_container" is-active-route asp-controller="Favorito" asp-action="Index">Favoritos</a>
 
-            <a class="link_container" is-active-route asp-controller="Playlists" asp-action="Index">Playlists</a>
+                <a class="link_container" is-active-route asp-controller="Playlists" asp-action="Index">Playlists</a>
 
-            <div id="TusAudios" class="link_container">
-                <h3><a>Tus audios</a></h3>
-            </div>
-            <div id="quienesSomos" class="link_container">
-                <h3>¿Quiénes somos?</h3>
-            </div>
-            <partial name="_LoginPartial" />
-            
-        </nav>
-        
-    </header>
+                <div id="TusAudios" class="link_container">
+                    <h3><a>Tus audios</a></h3>
+                </div>
+                <div id="quienesSomos" class="link_container">
+                    <h3>¿Quiénes somos?</h3>
+                </div>
+                <partial name="_LoginPartial" />
+
+            </nav>
+
+        </header>
+   
+
     
         <main role="main">
             @RenderBody()
@@ -41,6 +44,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

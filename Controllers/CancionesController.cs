@@ -13,6 +13,7 @@ using ProyectoSoundify.Models.dbModels;
 
 namespace ProyectoSoundify.Controllers
 {
+    [Authorize]
     public class CancionesController : Controller
     {
         private readonly SoundifyContext _context;
@@ -24,9 +25,9 @@ namespace ProyectoSoundify.Controllers
             _context = context;
             _userManager = userManager;
         }
-        
+
         // GET: Canciones
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation);

@@ -22,10 +22,10 @@ namespace ProyectoSoundify.Controllers
         }
 
         // GET: Anuncios
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var soundifyContext = _context.Anuncios.Include(a => a.IdUsuarioNavigation);
-            return View(await soundifyContext.ToListAsync());
+            IEnumerable<Anuncio> lstAnuncios = _context.Anuncios.Include(a => a.IdUsuarioNavigation).ToList();
+            return View(lstAnuncios);
         }
 
         // GET: Anuncios/Details/5

@@ -49,7 +49,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Canciones}/{action=Index}/{id?}");
+    pattern: "{controller=Canciones}/{action=Index}/{i  d?}");
 app.MapRazorPages();
 
 

@@ -115,5 +115,21 @@ namespace ProyectoSoundify.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostLogout(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToPage();
+            /*if (returnUrl != null)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                // This needs to be a redirect so that the browser performs a new
+                // request and the identity for the user gets updated.
+                return RedirectToPage();
+            }*/
+        }
     }
 }

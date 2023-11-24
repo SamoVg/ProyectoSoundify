@@ -10,22 +10,20 @@
     @await RenderSectionAsync("Css", required: false)
 </head>
 <body>
-   
-    <nav>
-        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Anuncios</a>
-        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Categorias</a>
-        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Usuarios</a>
-        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Audios</a>
-        <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Salir</a>
+   <header>
+        <nav>
+            <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Anuncios</a>
+            <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Categorias</a>
+            <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Usuarios</a>
+            <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Audios</a>
+            <a is-active-route asp-controller="Anuncios" asp-action="Index" class="link_item">Salir</a>
 
-
-    </nav>
+        </nav>
+   </header>
+    
         <main role="main">
             @RenderBody()
         </main>
-        
-  
-    
 
     <script src="http://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
