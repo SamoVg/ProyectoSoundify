@@ -100,7 +100,7 @@ namespace ProyectoSoundify.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAnuncio,TituloAnuncio,RutaImgAnuncio,IdUsuario")] Anuncio anuncio)
+        public async Task<IActionResult> Edit(int id, AnuncioHR anuncio)
         {
             if (id != anuncio.IdAnuncio)
             {
@@ -109,9 +109,16 @@ namespace ProyectoSoundify.Controllers
 
             if (ModelState.IsValid)
             {
+                Anuncio anuncio1 = new Anuncio
+                {
+                    IdAnuncio = anuncio.IdAnuncio,
+                    TituloAnuncio = anuncio.TituloAnuncio,
+                    RutaImgAnuncio = anuncio.RutaImgAnuncio,
+                    IdUsuario = anuncio.IdUsuario
+                };
                 try
                 {
-                    _context.Update(anuncio);
+                    _context.Update(anuncio1);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -173,5 +180,7 @@ namespace ProyectoSoundify.Controllers
         {
           return (_context.Anuncios?.Any(e => e.IdAnuncio == id)).GetValueOrDefault();
         }
+
+
     }
 }

@@ -1,13 +1,26 @@
-﻿nav {
-    display: flex;
-    width: 100dvw; 
-    align-items: center;
-    margin: 0px 20px;
+﻿header {
+    width: 100dvw;
     position: fixed;
-    top:0;
+    top: 0;
+    background-color: var(--color_principal);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width:100%;
 }
 
 .link_item {
-    padding: 50px;
-    background-color: var(--color_principal);
+    padding: 40px;
+}
+
+main *{
+    color: black;
+}
+
+main {
+   margin: 120px 50px 0;
+    
 }

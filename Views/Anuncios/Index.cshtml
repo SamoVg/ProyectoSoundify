@@ -32,7 +32,8 @@
                 @Html.DisplayFor(modelItem => item.TituloAnuncio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RutaImgAnuncio)
+                    <img href="@Html.DisplayFor(modelItem => item.RutaImgAnuncio)">
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)

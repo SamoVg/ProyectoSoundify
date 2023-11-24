@@ -133,7 +133,7 @@ namespace ProyectoSoundify.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCancion,Nombre,Descripcion,Duracion,IdCategoria,RutaImg,FechaSubida,IdUsuario")] CancionHR cancion)
+        public async Task<IActionResult> Edit(int id, CancionHR cancion)
         {
             if (id != cancion.IdCancion)
             {
@@ -218,5 +218,7 @@ namespace ProyectoSoundify.Controllers
         {
           return (_context.Cancions?.Any(e => e.IdCancion == id)).GetValueOrDefault();
         }
+
+
     }
 }
