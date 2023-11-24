@@ -24,6 +24,11 @@ nav {
     z-index: 100;
 }
 
+    .link_container.active {
+        background-color: var(--color_selected);
+      
+    }
+
 .menu {
     position: fixed;
     left: calc(20dvw - 1px);

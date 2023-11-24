@@ -54,11 +54,23 @@ namespace ProyectoSoundify.Controllers
         }
 
         // GET: Canciones/Create
-        public IActionResult Create()
+        public IActionResult Create(CancionHR cancion)
         {
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "IdCategoria");
-            ViewData["IdUsuario"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            Cancion cancion1 = new Cancion
+            {
+                Nombre = cancion.Nombre,
+                Descripcion = cancion.Descripcion,
+                Duracion = cancion.Duracion,
+                IdCategoria = cancion.IdCategoria,
+                RutaImg = cancion.RutaImg,
+                FechaSubida = cancion.FechaSubida,
+                IdUsuario = cancion.IdUsuario
+            };
+
+            cancion.Categoria = new SelectList(_context.Categoria, "IdCategoria", "NombreCategoria", cancion.IdCategoria);
+
+            
+            return View(cancion);
         }
 
         // POST: Canciones/Create
@@ -66,7 +78,7 @@ namespace ProyectoSoundify.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync([Bind("IdCancion,Nombre,Descripcion,Duracion,IdCategoria,RutaImg,FechaSubida,UserId")] CancionHR cancion)
+        public async Task<IActionResult> CreateAsync(CancionHR cancion)
         {
 
             var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual

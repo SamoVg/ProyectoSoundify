@@ -1,5 +1,7 @@
 ﻿@page
-@model IndexModel
+@using ProyectoSoundify.ViewModels;
+@model LoginViewModelcs
+
 @{
     ViewData["Title"] = "Perfil";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -22,6 +24,8 @@
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
+
+        <partial name="_Logout" />
     </div>
 </div>
 
