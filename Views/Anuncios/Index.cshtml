@@ -4,25 +4,26 @@
     Layout = "_LayoutAdministrador";
 }
 
-
-<h1>Index</h1>
+<h1>Anuncios</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<div class="table_container">
+
+
+<table id="TableIndexAnuncio">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TituloAnuncio)
+                Titulo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RutaImgAnuncio)
+                Imagen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+                Acciones
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -32,12 +33,10 @@
                 @Html.DisplayFor(modelItem => item.TituloAnuncio)
             </td>
             <td>
-                    <img href="@Html.DisplayFor(modelItem => item.RutaImgAnuncio)">
+                    <img src="@Html.DisplayFor(modelItem => item.RutaImgAnuncio)" alt="Imagen no Encontrada">
                 
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Id)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdAnuncio">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdAnuncio">Details</a> |
@@ -47,3 +46,10 @@
 }
     </tbody>
 </table>
+</div>
+
+
+<script>
+        $('#TableIndexAnuncio').DataTable();
+    
+</script>

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="datatables.net-buttons-dt" Version="2.4.2" />
+    <PackageReference Include="datatables.net-dt" Version="1.13.8" />
+    <PackageReference Include="datatables.net-fixedheader-dt" Version="3.4.0" />
+    <PackageReference Include="datatables.net-responsive-dt" Version="2.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.20" />

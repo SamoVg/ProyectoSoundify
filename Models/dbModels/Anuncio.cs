@@ -12,7 +12,7 @@ namespace ProyectoSoundify.Models.dbModels
         public int IdAnuncio { get; set; }
         [StringLength(50)]
         public string TituloAnuncio { get; set; } = null!;
-        [StringLength(50)]
+        [StringLength(256)]
         public string RutaImgAnuncio { get; set; } = null!;
         public int IdUsuario { get; set; }
 

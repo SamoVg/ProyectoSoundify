@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ProyectoSoundify.Models.dbModels.Anuncio>
+
+
+    @Html.DisplayNameFor(model => model.RutaImgAnuncio)
+       
+    <table>       
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    <img href="@Html.DisplayFor(modelItem => item.RutaImgAnuncio)">
+
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
