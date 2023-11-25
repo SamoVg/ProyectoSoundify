@@ -1,9 +1,9 @@
-﻿@page
+﻿@using ProyectoSoundify.Areas.Identity.Pages.Account.Manage
+
 @model IndexModel;
 
 @{
     ViewData["Title"] = "Perfil";
-    Layout = "_LayoutAdministrador";
 }
 
 <h3>@ViewData["Title"]</h3>
@@ -38,6 +38,3 @@
     </div>
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

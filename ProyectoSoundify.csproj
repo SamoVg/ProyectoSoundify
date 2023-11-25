@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Administrador\" />
     <Folder Include="wwwroot\Images\AudioImages\" />
     <Folder Include="wwwroot\Images\NewFolder\" />
     <Folder Include="wwwroot\Images\UserImages\" />
