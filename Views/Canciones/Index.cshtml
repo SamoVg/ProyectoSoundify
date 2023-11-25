@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Audios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -26,12 +26,15 @@
             </th>
             <th>
                 Subido el
+                
             </th>
-            
             <th>
-                Subido por:
+                Categoria
             </th>
-            <th></th>
+            <th>
+                Subido por
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -53,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.FechaSubida)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.IdCategoria)
+                @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)

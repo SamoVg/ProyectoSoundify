@@ -16,6 +16,10 @@ nav {
     padding: 40px;
 }
 
+    .link_item.active {
+        padding: 0 0 1px;
+        border-bottom: 3px solid white;
+    }
 main *{
     color: black;
 }
@@ -31,22 +35,27 @@ h1 {
 }
 p {
     margin: 20px 0;
+
 }
     p a {
         background-color: var(--color_principal);
         color: white;
         padding: 10px;
         border-radius: 8px;
-        border: 1px solid var(--color_btn)
+        border: 1px solid var(--color_btn);
+        
     }
-
+#categoria{
+    width:50%;
+}
 .table_container {
-    width: 100%;
-    margin: 0;
+    width: 90vw;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
+    overflow: scroll;
 }
 table {
     width: 100%;
@@ -63,6 +72,25 @@ table * {
 tbody * {
     background-color: rgba(108, 75, 208, 0.1);
     
+}
+tr{
+    margin: 0;
+    padding: 0;
+}
+
+td:last-child {
+    width:290px;
+    padding: 0;
+}
+td:last-child a{
+    
+}
+tbody tr {
+    transition: background-color .3s ease;
+}
+
+tbody tr:hover {
+    background-color: rgba(108, 75, 208, 0.3);
 }
 tr td {
     text-align: center;
@@ -82,3 +110,12 @@ td a {
     background-color: rgba(108, 75, 208, 0);
 }
 
+dt {
+    color: var(--color_principal);
+    margin: 10px 0;
+    font-weight: bolder;
+}
+
+dd {
+    border-bottom: 1px solid var(--color_selected);
+}

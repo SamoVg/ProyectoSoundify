@@ -4,18 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Categorias</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
-<table class="table">
+<table class="table" id="categoria">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NombreCategoria)
+                Nombre
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
