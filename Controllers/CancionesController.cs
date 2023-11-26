@@ -4,12 +4,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoSoundify.Models;
 using ProyectoSoundify.Models.dbModels;
+using NAudio.Wave;
 
 namespace ProyectoSoundify.Controllers
 {
@@ -18,12 +20,15 @@ namespace ProyectoSoundify.Controllers
     {
         private readonly SoundifyContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public CancionesController(SoundifyContext context, UserManager<ApplicationUser> userManager)
+
+        public CancionesController(SoundifyContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;   
         }
 
         // GET: Canciones
@@ -31,7 +36,8 @@ namespace ProyectoSoundify.Controllers
         public async Task<IActionResult> Index()
         {
             var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation);
-            return View(await soundifyContext.ToListAsync());
+            soundifyContext.OrderByDescending(x => x.Duracion);
+            return View(await soundifyContext.AsNoTracking().ToListAsync());
         }
 
         // GET: Canciones/Details/5
@@ -83,19 +89,24 @@ namespace ProyectoSoundify.Controllers
         {
 
             var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
-
             cancion.FechaSubida = DateTime.UtcNow; 
             cancion.IdUsuario = user.Id;
 
             if (ModelState.IsValid)
             {
+                string? filename = await GuardarFotografiaProductoAsync(cancion.ImagenArchivo);
+               
+
+                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
+                double durationInSeconds = audioFileReader.TotalTime.TotalSeconds;
+                TimeSpan duration = TimeSpan.FromSeconds(durationInSeconds);
                 Cancion cancion1 = new Cancion
                 {
                     Nombre = cancion.Nombre,
                     Descripcion = cancion.Descripcion,
-                    Duracion = cancion.Duracion,
+                    Duracion = duration,
                     IdCategoria = cancion.IdCategoria,
-                    RutaImg = cancion.RutaImg,
+                    RutaImg = filename,
                     FechaSubida = cancion.FechaSubida,
                     IdUsuario = cancion.IdUsuario
                 };
@@ -207,6 +218,7 @@ namespace ProyectoSoundify.Controllers
             var cancion = await _context.Cancions.FindAsync(id);
             if (cancion != null)
             {
+                BorrarFotografiaProducto(cancion.RutaImg);
                 _context.Cancions.Remove(cancion);
             }
             
@@ -219,6 +231,63 @@ namespace ProyectoSoundify.Controllers
           return (_context.Cancions?.Any(e => e.IdCancion == id)).GetValueOrDefault();
         }
 
+        public async Task<string?> ReemplazarFotografiaAsync(IFormFile? file, string? fileToReplace)
+        {
+            if (file != null)
+            {
+                string? newFileName = await GuardarFotografiaProductoAsync(file);
+                if (newFileName != null)
+                {
+                    BorrarFotografiaProducto(fileToReplace);
+                    return newFileName;
+                }
+            }
+            return null;
+        }
 
+        public async Task<string?> GuardarFotografiaProductoAsync(IFormFile? file)
+        {
+            if (file != null)
+            {
+                try
+                {
+                    string folder = "Images/Anuncios/";
+                    string fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder + fileName);
+
+                    using (FileStream stream = new FileStream(serverFolder, FileMode.Create))
+                    {
+                        //Copies data from entity.file to stream
+                        await file.CopyToAsync(stream);
+                    }
+                    return fileName;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public bool BorrarFotografiaProducto(string? fileName)
+        {
+            if (fileName != null)
+            {
+                try
+                {
+                    string folder = "Images/Anuncios/" + fileName;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    FileInfo fileInfo = new FileInfo(serverFolder);
+                    fileInfo.Delete();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

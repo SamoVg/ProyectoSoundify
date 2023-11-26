@@ -23,6 +23,7 @@ namespace ProyectoSoundify.Models
         public DateTime FechaSubida { get; set; }
         public int IdUsuario { get; set; }
 
+        public IFormFile? ImagenArchivo { get; set; }
 
         [JsonIgnore]
         [IgnoreMember]

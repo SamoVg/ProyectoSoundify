@@ -1,9 +1,23 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using ProyectoSoundify
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @model IndexModel;
 
 @{
-    ViewData["Title"] = "Perfil";
-    Layout = "_LayoutAdministrador";
+    if (SignInManager.IsSignedIn(User))
+    {
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "_LayoutAdministrador";
+        }
+        else
+        {
+           
+        }
+    }
+   
 }
 
 <h3>@ViewData["Title"]</h3>
