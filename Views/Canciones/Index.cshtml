@@ -1,14 +1,13 @@
-﻿    @model IEnumerable<ProyectoSoundify.Models.dbModels.Cancion>
+﻿@model CancionViewModel
 
 @{
+    
     ViewData["Title"] = "Index";
 }
 
 <h1>Audios</h1>
 
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -38,7 +37,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.Cancion)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -63,11 +63,23 @@
                 @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
             </td>
             <td>
+                
                 <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCancion">Delete</a>
+            </td>
+            <td>
+                    <form asp-action="DarLike" asp-route-id="@item.IdCancion">
+                       
+                        <input type="hidden" name="IdCancion" value="@item.IdCancion">
+                        <input type="submit" value="Dar Like" class="btn btn-danger" /> |
+
+                    </form>
             </td>
         </tr>
-}
+
+
+            
+            
+        }
     </tbody>
 </table>

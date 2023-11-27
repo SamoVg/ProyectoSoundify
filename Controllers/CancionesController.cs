@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ProyectoSoundify.Models;
 using ProyectoSoundify.Models.dbModels;
 using NAudio.Wave;
+using ProyectoSoundify.ViewModels;
 
 namespace ProyectoSoundify.Controllers
 {
@@ -21,7 +22,7 @@ namespace ProyectoSoundify.Controllers
         private readonly SoundifyContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
+        
 
 
         public CancionesController(SoundifyContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
@@ -31,13 +32,48 @@ namespace ProyectoSoundify.Controllers
             _webHostEnvironment = webHostEnvironment;   
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DarLike(int IdCancion, string returnURL)
+        {
+            returnURL = "~/Canciones";
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                ApplicationUser? Usuario = _context.Users.Where(u => u.Id == user.Id).Include(x => x.IdCancions).FirstOrDefault();
+                Cancion? cancion = _context.Cancions.Where(m => m.IdCancion == IdCancion).FirstOrDefault();
+                if (Usuario != null && cancion != null)
+                {
+
+                    Usuario.IdCancions.Add(cancion);
+                    _context.SaveChanges();
+                    return Redirect(returnURL);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
         // GET: Canciones
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation);
-            soundifyContext.OrderByDescending(x => x.Duracion);
-            return View(await soundifyContext.AsNoTracking().ToListAsync());
+
+            var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation).OrderByDescending(x => x.Duracion);
+           
+            CancionViewModel cancionViewModel = new CancionViewModel
+            {
+                Cancion = soundifyContext,
+                
+            };
+
+            return View(cancionViewModel);
         }
 
         // GET: Canciones/Details/5

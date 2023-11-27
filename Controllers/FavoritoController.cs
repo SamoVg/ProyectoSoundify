@@ -8,6 +8,7 @@ using ProyectoSoundify.ViewModels;
 
 namespace ProyectoSoundify.Controllers
 {
+    [Authorize]
     public class FavoritoController : Controller
     {
         private readonly SoundifyContext _context;
@@ -18,7 +19,9 @@ namespace ProyectoSoundify.Controllers
             _context = Context;
             _userManager = userManager;
         }
-        [Authorize]
+
+        
+
         // GET: FavoritoController
         public async Task<ActionResult> IndexAsync()
         {
@@ -53,7 +56,7 @@ namespace ProyectoSoundify.Controllers
         // POST: FavoritoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(int IdCancion, string returnURL)
+        public async Task<IActionResult> Create(int IdCancion, string returnURL)
         {
             try
             {
