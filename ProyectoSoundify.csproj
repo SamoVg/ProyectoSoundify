@@ -22,14 +22,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Administrador\" />
-    <Folder Include="wwwroot\Images\AudioImages\" />
-    <Folder Include="wwwroot\Images\NewFolder\" />
-    <Folder Include="wwwroot\Images\UserImages\" />
     <Folder Include="wwwroot\Audios\" />
+    <Folder Include="wwwroot\Images\Anuncios\" />
   </ItemGroup>
 
 </Project>

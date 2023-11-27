@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +16,15 @@ namespace ProyectoSoundify.Controllers
     [Authorize(Roles ="Admin")]
     public class AnunciosController : Controller
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly SoundifyContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AnunciosController(SoundifyContext context)
+        public AnunciosController(SoundifyContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Anuncios
@@ -48,10 +54,12 @@ namespace ProyectoSoundify.Controllers
         }
 
         // GET: Anuncios/Create
-        public IActionResult Create()
+        public IActionResult Create(AnuncioHR anuncio)
         {
-            ViewData["IdUsuario"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            Anuncio anuncio1 = new Anuncio();
+           
+
+            return View(anuncio);
         }
 
         // POST: Anuncios/Create
@@ -59,22 +67,27 @@ namespace ProyectoSoundify.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AnuncioHR anuncio)
+        public async Task<IActionResult> CreateAsync(AnuncioHR anuncio)
         {
+            var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
+            anuncio.IdUsuario = user.Id;
+            string? filename = await GuardarFotografiaProductoAsync(anuncio.ImagenArchivo);
+            anuncio.RutaImgAnuncio = filename;
             if (ModelState.IsValid)
+
             {
+
                 Anuncio anuncio1 = new Anuncio
                 {
-                    IdAnuncio = anuncio.IdAnuncio,
                     TituloAnuncio = anuncio.TituloAnuncio,
-                    RutaImgAnuncio = anuncio.RutaImgAnuncio,
-                    IdUsuario = anuncio.IdUsuario
+                    RutaImgAnuncio = filename,
+                    IdUsuario = anuncio.IdUsuario,
+                   
                 };
                 _context.Anuncios.Add(anuncio1);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdUsuario"] = new SelectList(_context.Users, "Id", "Id", anuncio.IdUsuario);
             return View(anuncio);
         }
 
@@ -181,6 +194,65 @@ namespace ProyectoSoundify.Controllers
           return (_context.Anuncios?.Any(e => e.IdAnuncio == id)).GetValueOrDefault();
         }
 
+        public async Task<string?> ReemplazarFotografiaAsync(IFormFile? file, string? fileToReplace)
+        {
+            if (file != null)
+            {
+                string? newFileName = await GuardarFotografiaProductoAsync(file);
+                if (newFileName != null)
+                {
+                    BorrarFotografiaProducto(fileToReplace);
+                    return newFileName;
+                }
+            }
+            return null;
+        }
+
+        public async Task<string?> GuardarFotografiaProductoAsync(IFormFile? file)
+        {
+            if (file != null)
+            {
+                try
+                {
+                    string folder = "Images/Anuncios/";
+                    string fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder + fileName);
+
+                    using (FileStream stream = new FileStream(serverFolder, FileMode.Create))
+                    {
+                        //Copies data from entity.file to stream
+                        await file.CopyToAsync(stream);
+                    }
+                    return fileName;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public bool BorrarFotografiaProducto(string? fileName)
+        {
+            if (fileName != null)
+            {
+                try
+                {
+                    string folder = "Images/Anuncios/" + fileName;
+                    string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                    FileInfo fileInfo = new FileInfo(serverFolder);
+                    fileInfo.Delete();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
 
     }
+
 }

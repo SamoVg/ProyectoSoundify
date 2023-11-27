@@ -1,4 +1,4 @@
-﻿@model ProyectoSoundify.Models.dbModels.Anuncio
+﻿@model ProyectoSoundify.Models.AnuncioHR
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form enctype="multipart/form-data" asp-action="Create" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TituloAnuncio" class="control-label"></label>
@@ -18,9 +18,9 @@
                 <span asp-validation-for="TituloAnuncio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RutaImgAnuncio" class="control-label"></label>
-                <input asp-for="RutaImgAnuncio" class="form-control" />
-                <span asp-validation-for="RutaImgAnuncio" class="text-danger"></span>
+
+                <input asp-for="ImagenArchivo" class="form-control" />
+                <span asp-validation-for="ImagenArchivo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="hidden" asp-for="IdUsuario" />

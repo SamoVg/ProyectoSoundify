@@ -9,5 +9,6 @@ namespace ProyectoSoundify.Models
         public string TituloAnuncio { get; set; } = null!;
         public string RutaImgAnuncio { get; set; } = null!;
         public int IdUsuario { get; set; }
+        public IFormFile? ImagenArchivo { get; set; }
     }
 }
