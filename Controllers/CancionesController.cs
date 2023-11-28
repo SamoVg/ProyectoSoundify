@@ -67,13 +67,20 @@ namespace ProyectoSoundify.Controllers
 
             var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation).OrderByDescending(x => x.Duracion);
            
-            CancionViewModel cancionViewModel = new CancionViewModel
-            {
-                Cancion = soundifyContext,
-                
-            };
+            
 
-            return View(cancionViewModel);
+            return View(soundifyContext);
+        }
+        //GET TusAudios
+        public async Task<ActionResult> TusAudiosAsync()
+        {
+            var user = await  _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
+            //_context.Cancions.Where(u => u.IdUsuario == user.Id).Include(c=> c.IdCancion).FirstOrDefault();
+            var TusAUDIOS = _context.Cancions.Where(d => d.IdUsuario == user.Id).Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation);
+
+
+
+            return View(TusAUDIOS);
         }
 
         // GET: Canciones/Details/5
@@ -131,7 +138,8 @@ namespace ProyectoSoundify.Controllers
             if (ModelState.IsValid)
             {
                 string? filename = await GuardarFotografiaProductoAsync(cancion.ImagenArchivo);
-               
+
+                //                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
 
                 AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
                 double durationInSeconds = audioFileReader.TotalTime.TotalSeconds;

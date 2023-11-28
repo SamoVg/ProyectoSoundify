@@ -1,0 +1,86 @@
+﻿@model IEnumerable< Cancion>
+
+@{
+
+    ViewData["Title"] = "Tus Audios";
+}
+
+
+<h1>Tus Audios</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Duracion
+            </th>
+            <th>
+                Ruta imagen
+            </th>
+            <th>
+                Subido el
+
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Subido por
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duracion)
+                </td>
+                <td>
+                    <audio src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" controls></audio>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaSubida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
+                </td>
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
+                </td>
+                <td>
+                    <form asp-action="DarLike" asp-route-id="@item.IdCancion">
+
+                        <input type="hidden" name="IdCancion" value="@item.IdCancion">
+                        <input type="submit" value="Dar Like" class="btn btn-danger" /> |
+
+                    </form>
+                </td>
+            </tr>
+
+
+
+
+        }
+    </tbody>
+</table>
