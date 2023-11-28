@@ -26,6 +26,7 @@ namespace ProyectoSoundify.Controllers
         public async Task<ActionResult> IndexAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
             ApplicationUser? Usuario = _context.Users.Where(u => u.Id == user.Id).Include(x => x.IdCancions).FirstOrDefault();
             if (Usuario != null)
             {

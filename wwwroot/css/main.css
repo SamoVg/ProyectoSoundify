@@ -214,13 +214,17 @@ main.hidden{
     background-color: var(--color_principal);
     width: 100%;
     border-radius:8px;
-    box-shadow: 0 0 20px var(--color_focus);
     flex-direction:column;
     border: 2px solid var(--color_selected);
     margin: auto;
     margin: 20px -20px;
     padding: 20px;
+    transition: box-shadow .3s ease;
 }
+
+    .music_container:hover {
+        box-shadow: 0 0 20px var(--color_focus);
+    }
 .music_header {
     display: flex;
     flex-direction: row;
@@ -275,4 +279,150 @@ main.hidden{
 .music_container h6{
     font-weight:200;
     font-size:var(--font_size_xl);
+}
+
+
+.Bienvenida{
+    display:flex;
+    height:80dvh;
+    align-items: center;
+    justify-items:center;
+    justify-content:center;
+}
+
+    .Bienvenida img {
+        width: 70%;
+        animation: subirimg 2s ease-in-out infinite alternate-reverse;
+    }
+
+
+
+.Bienvenida_texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    text-align:center;
+}
+
+   
+
+    .Bienvenida_texts h1 {
+        margin: 20px;
+        font-size: 86px;
+        text-shadow: 0 0 20px var(--color_focus); 
+        animation: subir 2s ease-in-out infinite alternate-reverse;
+    }
+ .Bienvenida_texts p {
+        font-size: 28px;
+        margin: 20px 0;
+    }
+    .Bienvenida_texts h4 {
+        font-size: 22px;
+        font-weight:100;
+    }
+
+
+.quienes{
+    display:flex;
+    flex-direction: column;
+    text-align:center;
+}
+
+    .quienes h1 {
+        margin: 20px 0 40px;
+        font-size: 56px;
+        text-shadow: 0 0 10px var(--color_focus);
+    }
+
+.quienes_content{
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+
+}
+
+    .quienes_content img {
+        width: 50%;
+        margin: 0 30px;
+        animation: subirpoco 2s ease-in-out infinite alternate-reverse;
+    }
+
+
+.text{
+    font-size: 28px;
+    text-align:left;
+}
+
+    .text span {
+        color: var(--color_focus);
+        text-shadow: 0 0 10px var(--color_focus);
+    }
+
+select {
+    background-color: var(--color_principal);
+    border: 1px solid var(--color_focus);
+    padding: 5px;
+    border-radius: 5px;
+   
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+}
+.form-group{
+    margin: 10px;
+    display:flex;
+    
+}
+
+    .form-group label{
+        width: 150px;
+    }
+    input {
+        border: 1px solid var(--color_focus);
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+        input[type="submit"], .button {
+            font-size: 26px;
+            padding: 1px;
+            transition: all .3s ease;
+            border: 1px solid var(--color_focus);
+            border-radius: 5px;
+            padding: 5px;
+            
+        }
+
+        a.button {
+            margin-top:20px;
+        }
+        input[type="submit"]:hover {
+            background-color: var(--color_focus);
+        }
+
+.form-control {
+    background-color: var(--color_principal);
+}
+
+@keyframes subir {
+    100%{
+        transform:translateY(10%);
+    }
+}
+
+@keyframes subirpoco {
+    100% {
+        transform: translateY(2%);
+    }
+}
+
+@keyframes subirimg {
+
+    100% {
+        transform: translateY(5%);
+    }
 }

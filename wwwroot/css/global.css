@@ -29,26 +29,29 @@ html{
     --fontSize_xl: 24px;
 }
 
-a{
-        text-decoration: none;
+a {
+    text-decoration: none;
     transition: .3s all ease;
     font-size: var(--fontSize_large);
     font-weight: 600;
 }
-h3 a{
+h3 a {
     color: white;
     text-decoration: none;
+    text-shadow: none;
+    transition: .3s ease all;
 }
 
 
-input{
+input, select{
     background-color: transparent;  
 }
 
 
+
 a:hover, h3 a:hover {
-    background-color: rgb(99, 64, 204);
-    text-shadow: 0px 0px 10px var(--color_principal_transparent);
+    
+    text-shadow: 0px 0px 10px var(--color_focus);
 }
 
 button {
@@ -60,4 +63,20 @@ button {
 }
 button:hover{
     text-shadow: 0px 0px 3px var(--color_focus);
+}
+
+dl.row{
+    display:flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+dd{
+    margin: 0 0 15px;
+    border-bottom:2px solid var(--color_principal);
+}
+
+dt{
+    font-weight:600;
+    margin:0;
 }

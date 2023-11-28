@@ -70,6 +70,12 @@ namespace ProyectoSoundify.Controllers
 
             return View(soundifyContext);
         }
+
+        [AllowAnonymous]
+        public IActionResult QuienesSomos()
+        {
+            return View();
+        }
         // GET: Canciones
         [AllowAnonymous]
         public IActionResult Index()
@@ -272,11 +278,15 @@ namespace ProyectoSoundify.Controllers
             }
             var returnURL = Url.Content("~/Canciones/TusAudios");
             var cancion = await _context.Cancions.FindAsync(id);
+            Cancion? LikesCancion = _context.Cancions.Where(c=>c.IdCancion== id).Include(z=> z.IdUsuarios).FirstOrDefault();
             if (cancion != null)
             {
+               // ApplicationUser? Usuariolike = _context.Users.Include(x => x.IdCancions).FirstOrDefault();
+                //_context.Users.Remove(Usuariolike);
                 BorrarFotografiaProducto(cancion.RutaImg);
-                 //FavoritoController.DeleteAsync(id, returnURL);
+                //_context.Cancions.Remove(LikesCancion);
                 _context.Cancions.Remove(cancion);
+                
             }
             
             await _context.SaveChangesAsync();
