@@ -9,79 +9,35 @@
 <h1>Tus Audios</h1>
 <a asp-action="Create">Subir Audio</a>|
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Descripcion
-            </th>
-            <th>
-                Duracion
-            </th>
-            <th>
-                Ruta imagen
-            </th>
-            <th>
-                Subido el
 
-            </th>
-            <th>
-                Categoria
-            </th>
-            <th>
-                Subido por
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duracion)
-                </td>
-                <td>
-                    <audio src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" controls></audio>
+@foreach (var item in Model)
+{
+    <section class="music_container">
+        <div class="music_header">
+            <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+            <h3>
+                Categoria: @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
+            </h3>
+        </div>
+        <div class="music_controls">
+            <div class="player">
+                <audio>
+                    <source src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="music_actions">
+                <h3 class="duracion">
+                    Duracion: @Html.DisplayFor(modelItem => item.Duracion)
+                </h3>
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaSubida)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
-                </td>
-                <td>
-
-                    <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdCancion">Borrar</a> |
-                </td>
-                <td>
-                    <form asp-action="DarLike" asp-route-id="@item.IdCancion">
-
-                        <input type="hidden" name="IdCancion" value="@item.IdCancion">
-                        <input type="submit" value="Dar Like" class="btn btn-danger" /> |
-
-                    </form>
-                </td>
-            </tr>
+                <a class="duracion" asp-action="Edit" asp-route-id="@item.IdCancion">✏️</a>
+                <a class="duracion" asp-action="Delete" asp-route-id="@item.IdCancion">❌</a> 
+               
 
 
-
-
-        }
-    </tbody>
-</table>
+            </div>
+        </div>
+        <h5>@Html.DisplayFor(modelItem => item.Descripcion)</h5>
+        <h6>Subido por: @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName) el @Html.DisplayFor(modelItem => item.FechaSubida)</h6>
+    </section>
+}

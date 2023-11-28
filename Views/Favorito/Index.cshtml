@@ -2,47 +2,35 @@
 @{
  }
 
- <link rel="stylesheet" href="wwwroot/css/favoritos.css">
+ <h1>Tus Favoritos</h1>
+@foreach (var item in Model.User.IdCancions)
+{
+    <section class="music_container">
+        <div class="music_header">
+            <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
+            <h3>
+                Categoria: @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
+            </h3>
+        </div>
+        <div class="music_controls">
+            <div class="player">
+                <audio>
+                    <source src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="music_actions">
+                <h3 class="duracion">
+                    Duracion: @Html.DisplayFor(modelItem => item.Duracion)
+                </h3>
+                <form asp-controller="Favorito" asp-action="Delete" asp-route-returnUrl="@Model.ReturnUrl">
+                    <input type="hidden" name="IdCancion" value="@Html.DisplayFor(modelItem => item.IdCancion)">
+                    <button class="like" type="submit">💔</button>
+                </form>
 
 
-<h1>Soy favoritos</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nombre Cancion
-            </th>
-            <th>
-                Duracion
-            </th>
-            <th>
-                Imagen
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.User.IdCancions)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duracion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RutaImg)
-                </td>
-                <td>
-                    <form asp-controller="Favorito" asp-action="Delete" asp-route-returnUrl="@Model.ReturnUrl">
-                        <input type="hidden" name="IdCancion" value="@Html.DisplayFor(modelItem => item.IdCancion)">
-                        <button type="submit">Quitar like</button>
-                    </form>
-                    <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </div>
+        </div>
+        <h5>@Html.DisplayFor(modelItem => item.Descripcion)</h5>
+        <h6>Subido por: @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName) el @Html.DisplayFor(modelItem => item.FechaSubida)</h6>
+    </section>
+}

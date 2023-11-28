@@ -194,7 +194,7 @@ namespace ProyectoSoundify.Controllers
             {
                 return NotFound();
             }
-
+            var returnURL = "Canciones/TusAudios";
             if (ModelState.IsValid)
             {
                 string? Filename = await ReemplazarFotografiaAsync(cancion.ImagenArchivo, cancion.RutaImg);
@@ -224,11 +224,11 @@ namespace ProyectoSoundify.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect(returnURL);
             }
             ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "IdCategoria", cancion.IdCategoria);
             ViewData["IdUsuario"] = new SelectList(_context.Users, "Id", "Id", cancion.IdUsuario);
-            return View(cancion);
+            return Redirect(returnURL);
         }
 
         // GET: Canciones/Delete/5

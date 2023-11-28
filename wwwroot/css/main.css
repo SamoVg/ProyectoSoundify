@@ -212,8 +212,9 @@ main.hidden{
 .music_container {
     display: flex;
     background-color: var(--color_principal);
-    width: 70vw;
+    width: 100%;
     border-radius:8px;
+    box-shadow: 0 0 20px var(--color_focus);
     flex-direction:column;
     border: 2px solid var(--color_selected);
     margin: auto;
@@ -233,6 +234,7 @@ main.hidden{
 }
 
 .like {
+    
     font-size: 32px;
 }
 
@@ -246,7 +248,6 @@ main.hidden{
     display: flex;
     align-items:center;
     justify-content:center;
-    width:30%;
 }
 
 .player.green-audio-player {
@@ -254,7 +255,24 @@ main.hidden{
     max-width:800px;
 }
 
-.duracion{
-    font-size:16px;
-    margin: 0 15px;
+    .player.green-audio-player .slider .gap-progress .pin {
+        background-color: var(--color_principal)
+    }
+
+    .player.green-audio-player .slider .gap-progress {
+        background-color: var(--color_principal)
+    }
+    .duracion {
+        font-size: 16px;
+        margin: 0 15px;
+        text-align: center;
+    }
+
+    a.duracion:hover{
+        transform:scale(120%);
+    }
+
+.music_container h6{
+    font-weight:200;
+    font-size:var(--font_size_xl);
 }
