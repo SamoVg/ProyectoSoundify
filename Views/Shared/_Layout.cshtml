@@ -47,5 +47,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        GreenAudioPlayer.init({
+            selector: '.player', // inits Green Audio Player on each audio container that has class "player"
+            stopOthersOnPlay: true,
+            showDownloadButton: true
+        });
+    </script>
 </body>
 </html>

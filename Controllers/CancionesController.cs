@@ -197,13 +197,14 @@ namespace ProyectoSoundify.Controllers
 
             if (ModelState.IsValid)
             {
+                string? Filename = await ReemplazarFotografiaAsync(cancion.ImagenArchivo, cancion.RutaImg);
                 Cancion cancion1 = new Cancion
                 {
                     Nombre = cancion.Nombre,
                     Descripcion = cancion.Descripcion,
                     Duracion = cancion.Duracion,
                     IdCategoria = cancion.IdCategoria,
-                    RutaImg = cancion.RutaImg,
+                    RutaImg = Filename,
                     FechaSubida = cancion.FechaSubida,
                     IdUsuario = cancion.IdUsuario
                 };
@@ -259,6 +260,7 @@ namespace ProyectoSoundify.Controllers
             {
                 return Problem("Entity set 'SoundifyContext.Cancions'  is null.");
             }
+            var returnURL = Url.Content("~/Canciones/TusAudios");
             var cancion = await _context.Cancions.FindAsync(id);
             if (cancion != null)
             {
@@ -267,7 +269,7 @@ namespace ProyectoSoundify.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect(returnURL);
         }
 
         private bool CancionExists(int id)

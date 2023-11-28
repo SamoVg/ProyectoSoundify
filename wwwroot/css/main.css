@@ -205,35 +205,56 @@ main.hidden{
         color: #fff;
     }
 
-   
-    .animateUpwards{
-        animation: SubirElements 1s ease ;
-        overflow: hidden;
-        position: relative;
-    }
+     input{
+         border: none;
+     }
 
-    .comingDown{
-        animation: ComingDown 1s ease;
-    }
+.music_container {
+    display: flex;
+    background-color: var(--color_principal);
+    width: 70vw;
+    border-radius:8px;
+    flex-direction:column;
+    border: 2px solid var(--color_selected);
+    margin: auto;
+    margin: 20px -20px;
+    padding: 20px;
+}
+.music_header {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content:space-between;
+}
 
-    /*KEYFRAMES ANIMACIONES*/
+.music_header h3:last-child{
+    margin-right:10%;
+    
+}
 
-    @keyframes SubirElements {
-        0%{
-            transform: translateY(0);
-        }
-        
-        100%{
-            transform: translateY(100dvh);
-        }
-    }
+.like {
+    font-size: 32px;
+}
 
-    @keyframes ComingDown {
-        0%{
-            transform: translateY(-10dvh);
-        }
-        
-        100%{
-            transform: translateY(0);
-        }
-    }
+.music_controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+}
+.music_actions{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    width:30%;
+}
+
+.player.green-audio-player {
+    width: 70%;
+    max-width:800px;
+}
+
+.duracion{
+    font-size:16px;
+    margin: 0 15px;
+}

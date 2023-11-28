@@ -22,12 +22,7 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <!--Aqui hay que obtener la duracion dependiendo del archivo-->
-            <div class="form-group">
-                <label asp-for="Duracion" class="control-label"></label>
-                <input asp-for="Duracion" class="form-control" />
-                <span asp-validation-for="Duracion" class="text-danger"></span>
-            </div>
+            
             <!--Aqui hay que cambiarlo por el nombre de la categoria en vez del id-->
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
@@ -47,9 +42,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
