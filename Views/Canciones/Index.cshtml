@@ -50,7 +50,13 @@
                 @Html.DisplayFor(modelItem => item.Duracion)
             </td>
             <td>
-                    <audio src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" controls></audio>
+                    <div class="player">
+                        <audio>
+                            <source  src="../Images/Anuncios/@Html.DisplayFor(modelItem => item.RutaImg)" type="audio/mpeg">
+                        </audio>
+                </div>
+                    
+                   
                     
             </td>
             <td>
@@ -83,3 +89,9 @@
         }
     </tbody>
 </table>
+<script>
+    GreenAudioPlayer.init({
+        selector: '.player', // inits Green Audio Player on each audio container that has class "player"
+        stopOthersOnPlay: true
+    });
+</script>

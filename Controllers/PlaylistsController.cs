@@ -26,7 +26,9 @@ namespace ProyectoSoundify.Controllers
         // GET: Playlists
         public async Task<IActionResult> Index()
         {
-            var soundifyContext = _context.Playlists.Include(p => p.IdUserNavigation);
+            var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
+
+            var soundifyContext = _context.Playlists.Include(p => p.IdUserNavigation).Where(d=>d.IdUser == user.Id);
             return View(await soundifyContext.ToListAsync());
         }
 
