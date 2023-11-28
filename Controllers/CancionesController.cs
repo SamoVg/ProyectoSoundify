@@ -60,6 +60,16 @@ namespace ProyectoSoundify.Controllers
                 return View();
             }
         }
+        
+            public IActionResult IndexAdministrador()
+        {
+
+            var soundifyContext = _context.Cancions.Include(c => c.IdCategoriaNavigation).Include(c => c.IdUsuarioNavigation).OrderByDescending(x => x.Duracion);
+
+
+
+            return View(soundifyContext);
+        }
         // GET: Canciones
         [AllowAnonymous]
         public IActionResult Index()
@@ -265,6 +275,7 @@ namespace ProyectoSoundify.Controllers
             if (cancion != null)
             {
                 BorrarFotografiaProducto(cancion.RutaImg);
+                 //FavoritoController.DeleteAsync(id, returnURL);
                 _context.Cancions.Remove(cancion);
             }
             

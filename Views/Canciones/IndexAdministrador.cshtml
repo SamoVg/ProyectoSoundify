@@ -1,0 +1,85 @@
+﻿@model IEnumerable< Cancion>
+@{
+    
+    ViewData["Title"] = "Index";
+}
+
+<h1>Audios</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Duracion
+            </th>
+            <th>
+                Direccion
+            </th>
+            <th>
+                Subido el
+                
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Subido por
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracion)
+            </td>
+            <td>
+                    
+                 @Html.DisplayFor(modelItem => item.RutaImg)
+                        
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSubida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.UserName)
+            </td>
+            <td>    
+                    <a asp-action="ManageUserRoles" asp-route-userId="@item.IdUsuario"></a>
+                    <a class="duracion" asp-action="Edit" asp-route-id="@item.IdCancion">✏️</a>
+                    <a class="duracion" asp-action="Delete" asp-route-id="@item.IdCancion">❌</a>
+            </td>
+            
+        </tr>
+
+
+            
+            
+        }
+    </tbody>
+</table>
+<script>
+    GreenAudioPlayer.init({
+        selector: '.player', // inits Green Audio Player on each audio container that has class "player"
+        stopOthersOnPlay: true,
+        showDownloadButton: true
+    });
+</script>

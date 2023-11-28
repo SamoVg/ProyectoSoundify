@@ -56,7 +56,12 @@ namespace ProyectoSoundify.Controllers
         // GET: Anuncios/Create
         public IActionResult Create(AnuncioHR anuncio)
         {
-            Anuncio anuncio1 = new Anuncio();
+            Anuncio anuncio1 = new Anuncio
+            {
+                TituloAnuncio = anuncio.TituloAnuncio,
+                RutaImgAnuncio = anuncio.RutaImgAnuncio,
+                IdUsuario = anuncio.IdUsuario,
+            };
            
 
             return View(anuncio);
@@ -71,11 +76,11 @@ namespace ProyectoSoundify.Controllers
         {
             var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
             anuncio.IdUsuario = user.Id;
-            string? filename = await GuardarFotografiaProductoAsync(anuncio.ImagenArchivo);
-            anuncio.RutaImgAnuncio = filename;
+            
             if (ModelState.IsValid)
 
             {
+                string? filename = await GuardarFotografiaProductoAsync(anuncio.ImagenArchivo);
 
                 Anuncio anuncio1 = new Anuncio
                 {
@@ -88,6 +93,8 @@ namespace ProyectoSoundify.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdUsuario"] = new SelectList(_context.Users, "Id", "Id", anuncio.IdUsuario);
+
             return View(anuncio);
         }
 

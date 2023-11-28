@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoSoundify.Models.dbModels;
+using ProyectoSoundify.ViewModels;
 
 namespace ProyectoSoundify.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class UsuarioController : Controller
     {
         private readonly SoundifyContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsuarioController(SoundifyContext context)
+        public UsuarioController(SoundifyContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: Usuario
@@ -133,6 +141,38 @@ namespace ProyectoSoundify.Controllers
             }
 
             return View(applicationUser);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(string userid)
+        {
+            ViewBag.userid = userid;
+
+            var user = await _userManager.FindByIdAsync(userid);
+            if (user == null) { 
+                ViewBag.ErrorMessage = $"El usuario con id = { ViewBag.userid } no se encuentra";
+                return View("NotFound");
+            }
+            var model = new List<UserRolesViewModel>();
+
+            foreach(var role in _roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };  
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+                model.Add(userRolesViewModel);
+            }
+            return View(model);
         }
 
         // POST: Usuario/Delete/5

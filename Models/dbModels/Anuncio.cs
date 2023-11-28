@@ -13,7 +13,7 @@ namespace ProyectoSoundify.Models.dbModels
         [StringLength(50)]
         public string TituloAnuncio { get; set; } = null!;
         [StringLength(256)]
-        public string RutaImgAnuncio { get; set; } = null!;
+        public string? RutaImgAnuncio { get; set; }
         public int IdUsuario { get; set; }
 
         [ForeignKey("IdUsuario")]
