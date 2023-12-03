@@ -155,9 +155,9 @@ namespace ProyectoSoundify.Controllers
             {
                 string? filename = await GuardarFotografiaProductoAsync(cancion.ImagenArchivo);
 
-                //                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
-
-                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
+            //                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\AlanV\\Desktop\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
+            
+                AudioFileReader audioFileReader = new AudioFileReader("C:\\Users\\K28VG\\source\\repos\\ProyectoSoundify\\wwwroot\\Images\\Anuncios\\" + filename);
                 double durationInSeconds = audioFileReader.TotalTime.TotalSeconds;
                 TimeSpan duration = TimeSpan.FromSeconds(durationInSeconds);
                 Cancion cancion1 = new Cancion
@@ -277,11 +277,12 @@ namespace ProyectoSoundify.Controllers
                 return Problem("Entity set 'SoundifyContext.Cancions'  is null.");
             }
             var returnURL = Url.Content("~/Canciones/TusAudios");
-            var cancion = await _context.Cancions.FindAsync(id);
+            var cancion =  _context.Cancions.Where(x=>x.IdCancion == id).Include(Z=>Z.IdUsuarios).FirstOrDefault();
+            
             Cancion? LikesCancion = _context.Cancions.Where(c=>c.IdCancion== id).Include(z=> z.IdUsuarios).FirstOrDefault();
             if (cancion != null)
             {
-               // ApplicationUser? Usuariolike = _context.Users.Include(x => x.IdCancions).FirstOrDefault();
+                cancion.IdUsuarios.Clear();
                 //_context.Users.Remove(Usuariolike);
                 BorrarFotografiaProducto(cancion.RutaImg);
                 //_context.Cancions.Remove(LikesCancion);

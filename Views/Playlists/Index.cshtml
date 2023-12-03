@@ -18,10 +18,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.NombrePlaylist)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUserNavigation)
-            </th>
-            <th></th>
+      
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -33,9 +31,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NombrePlaylist)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUserNavigation.Id)
-            </td>
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdPlaylist">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdPlaylist">Details</a> |

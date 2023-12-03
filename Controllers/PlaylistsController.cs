@@ -107,23 +107,32 @@ namespace ProyectoSoundify.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPlaylist,IdUser,FechaCreacion,NombrePlaylist")] Playlist playlist)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPlaylist,IdUser,FechaCreacion,NombrePlaylist")] PlaylistHR playlist)
         {
             if (id != playlist.IdPlaylist)
             {
                 return NotFound();
             }
+            var user = await _userManager.GetUserAsync(User); //Obtiene el ID del usuario Actual
 
+            playlist.FechaCreacion = playlist.FechaCreacion;
+            playlist.IdUser = user.Id;
+            Playlist playlist1 = new Playlist
+            {
+                IdUser = playlist.IdUser,
+                FechaCreacion = playlist.FechaCreacion,
+                NombrePlaylist = playlist.NombrePlaylist
+            };
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(playlist);
+                    _context.Update(playlist1);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlaylistExists(playlist.IdPlaylist))
+                    if (!PlaylistExists(playlist1.IdPlaylist))
                     {
                         return NotFound();
                     }

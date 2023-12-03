@@ -1,6 +1,10 @@
 body{
     background: #333;
 }
+
+h1{
+    margin:0 0 20px;
+}
 nav {
     width: 20dvw;
     height: 100dvh;
@@ -87,6 +91,8 @@ nav::before:hover {
     background-color: rgb(91, 39, 174);
     
 }
+
+
 
 .link_container.perfil{
     justify-items: center;

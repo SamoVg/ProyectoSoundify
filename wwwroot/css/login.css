@@ -8,6 +8,8 @@ main {
     background-size: cover;
 }
 
+
+
 .login {
     width: 40dvw;
     height: 70dvh;
@@ -75,6 +77,9 @@ form .login_title {
     background-color: var(--color_btn);
     color: white;
     width: 50%;
+    margin:20px;
+    padding:10px;
+    border-radius:10px;
     transition: .3s all ease
 }
 
